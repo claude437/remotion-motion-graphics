@@ -37,4 +37,12 @@ ffmpeg -y -loglevel error -f lavfi -i "aevalsrc=exprs='\
   -af "afade=t=in:d=0.015,lowpass=f=1200,afade=t=out:st=0.45:d=0.25" \
   -ac 2 -c:a libmp3lame -b:a 192k public/audio/pulse.mp3
 
-echo "Wrote music-bed, whoosh, click and pulse to public/audio/"
+# 1.2 s soft liquid pour: band-passed noise with rhythmic bubbles (water scene).
+ffmpeg -y -loglevel error -f lavfi -i "aevalsrc=exprs='\
+0.28*sin(2*PI*(260+620*mod(t*6,1))*t)*exp(-mod(t*6,1)*14)\
++0.18*sin(2*PI*(420+380*mod(t*9+0.3,1))*t)*exp(-mod(t*9+0.3,1)*18)'\
+:s=48000:d=1.2" -f lavfi -i "anoisesrc=color=pink:d=1.2:a=0.25:r=48000:seed=11" \
+  -filter_complex "[1]bandpass=f=1100:w=900[n];[0][n]amix=inputs=2:normalize=0,lowpass=f=3200,afade=t=in:d=0.12,afade=t=out:st=0.8:d=0.4,volume=1.6" \
+  -ac 2 -c:a libmp3lame -b:a 192k public/audio/liquid.mp3
+
+echo "Wrote music-bed, whoosh, click, pulse and liquid to public/audio/"

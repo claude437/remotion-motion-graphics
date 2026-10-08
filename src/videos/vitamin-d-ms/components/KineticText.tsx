@@ -23,6 +23,10 @@ type KineticTextProps = {
   readonly top: number;
   /** Seconds between consecutive words. */
   readonly stagger?: number;
+  /** Text block insets from the frame edges (px). Defaults match the Vitamin D videos. */
+  readonly left?: number;
+  readonly right?: number;
+  readonly fontFamily?: string;
 };
 
 /**
@@ -38,6 +42,9 @@ export const KineticText: React.FC<KineticTextProps> = ({
   outAt,
   top,
   stagger = 0.07,
+  left = 100,
+  right = 120,
+  fontFamily = ARABIC_FONT,
 }) => {
   const exit =
     outAt === undefined
@@ -55,13 +62,13 @@ export const KineticText: React.FC<KineticTextProps> = ({
       style={{
         position: "absolute",
         top,
-        left: 100,
-        right: 120,
+        left,
+        right,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         gap: 10,
-        fontFamily: ARABIC_FONT,
+        fontFamily,
         direction: "rtl",
         textAlign: "center",
         opacity: 1 - exit,

@@ -11,6 +11,8 @@ import { FORMAT } from "./videos/vitamin-d-ms/timeline";
 import { VitaminDMS } from "./videos/vitamin-d-ms/VitaminDMS";
 import { FORMAT as PART2_FORMAT } from "./videos/vitamin-d-ms-part2/timeline";
 import { VitaminDMSPart2 } from "./videos/vitamin-d-ms-part2/VitaminDMSPart2";
+import { FORMAT as TAYIBAT_FORMAT } from "./videos/tayibat-ms/timeline";
+import { TayibatMS } from "./videos/tayibat-ms/TayibatMS";
 
 /**
  * Every renderable video is registered here. Width, height and fps come from
@@ -77,6 +79,16 @@ export const RemotionRoot: React.FC = () => {
         height={PART2_FORMAT.height}
         fps={PART2_FORMAT.fps}
         durationInFrames={PART2_FORMAT.seconds * PART2_FORMAT.fps}
+      />
+
+      {/* Tayibat diet vs evidence-based MS care (15 × 2 s scenes). Timing + SFX cues: src/videos/tayibat-ms/timeline.ts */}
+      <Composition
+        id="TayibatMS"
+        component={TayibatMS}
+        width={TAYIBAT_FORMAT.width}
+        height={TAYIBAT_FORMAT.height}
+        fps={TAYIBAT_FORMAT.fps}
+        durationInFrames={TAYIBAT_FORMAT.seconds * TAYIBAT_FORMAT.fps}
       />
 
       {/* new-compositions-go-above-this-line */}

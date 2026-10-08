@@ -48,6 +48,20 @@ npm run dev                      # then open http://localhost:3000/VitaminDMS-Pa
 npm run render:vitamin-d-part2   # → renders/vitamin-d-ms-part2.mp4
 ```
 
+## TayibatMS
+
+30 seconds, 1080×1920, 60 fps, 1800 frames: why the Tayibat diet should not replace evidence-based MS care.
+Fifteen 2-second scenes in one continuous morph. SFX only (no speech, no music). Timing, layout and SFX cues:
+`src/videos/tayibat-ms/timeline.ts`.
+
+```bash
+npm run dev                           # then open http://localhost:3000/TayibatMS
+npm run render:tayibat                # → renders/tayibat-ms-30s.mp4 (picture + SFX)
+npm run render:tayibat:video-only     # → renders/tayibat-ms-30s-video-only.mp4 (no audio)
+npm run render:tayibat:sfx            # → renders/tayibat-ms-30s-sfx.wav (SFX stem only)
+npm run render:tayibat:cues -- 0.8    # → renders/tayibat-ms-30s-sfx-cues.csv (+ times for a 0.8× edit)
+```
+
 ## Changing resolution, frame rate and duration
 
 Edit `src/config/video.ts`:

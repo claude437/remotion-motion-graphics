@@ -17,6 +17,7 @@ type ArLabelProps = {
   readonly color?: string;
   /** Optional pill background. */
   readonly pill?: string;
+  readonly fontFamily?: string;
 };
 
 /** Short Arabic RTL label anchored by its center, used inside diagrams and cards. */
@@ -30,6 +31,7 @@ export const ArLabel: React.FC<ArLabelProps> = ({
   weight = 600,
   color = BRAND.charcoal,
   pill,
+  fontFamily = ARABIC_FONT,
 }) => {
   const o = interpolate(progress, [0, 0.5], [0, 1], CLAMP) * opacity;
   if (o <= 0) return null;
@@ -49,7 +51,7 @@ export const ArLabel: React.FC<ArLabelProps> = ({
     >
       <span
         style={{
-          fontFamily: ARABIC_FONT,
+          fontFamily,
           fontSize: size,
           fontWeight: weight,
           lineHeight: 1.3,

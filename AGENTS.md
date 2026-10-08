@@ -36,13 +36,19 @@ src/
   videos/vitamin-d-ms-part2/  VitaminDMS-Part2: 20 s continuation; opens on Part 1's final frame and reuses
                         Part 1's theme + components. New: BoneHealthIcon, BloodTestPanel, DoseDecisionPanel,
                         DoseCard/BigValue, SafetyLimitPanel, DoctorMonitoringPanel, KidneyWarning, SourceIcons, ArLabel
+  videos/tayibat-ms/    TayibatMS: 30 s (15 × 2 s scenes, morphs in each scene's last 0.4 s), Cairo font.
+    timeline.ts         dependency-free: format, scenes, headlines, layout, SFX cue list (read by export-sfx-cues.mjs)
+    components/         FoodPlate, ResearchCards, NutrientTiles (+Battery/BowelIcon/HeatIcon/Checklist),
+                        SugarDrink, SmokeIcons, WaterGlass, MedicationCard; reuses NerveMyelin, MRIScan, KineticText …
 public/                 static assets, referenced with staticFile("path/inside/public")
   audio/                music-bed.mp3 (120 BPM), whoosh.mp3, click.mp3, pulse.mp3 (scripts/generate-audio.sh)
   fonts/inter/          Inter woff2 files + OFL license
   fonts/ibm-plex-sans-arabic/  Arabic + Latin subsets + OFL license (for RTL videos)
+  fonts/cairo/          Cairo Arabic + Latin subsets + OFL license (TayibatMS)
 scripts/
   new-composition.mjs   `npm run new -- Name` scaffolds + registers a composition
   generate-audio.sh     regenerates the sample audio with ffmpeg
+  export-sfx-cues.mjs   TayibatMS SFX cue sheet (CSV) for retiming after slowing the video
 out/, renders/          render output (git-ignored)
 ```
 

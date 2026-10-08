@@ -18,12 +18,30 @@ type NerveMyelinProps = {
   readonly opacity?: number;
   /** Idle phase so the sheath breathes subtly. */
   readonly phase?: number;
+  /**
+   * Partial demyelination of one sleeve (0 → 1). The sleeve thins, frays and
+   * sheds small fragments, but the axon underneath always stays continuous.
+   */
+  readonly damage?: { readonly index: number; readonly amount: number };
+  /** Off-white signal pulses at positions 0 → 1 along the axon (cell body → terminals). */
+  readonly pulses?: readonly number[];
 };
 
 const SEGMENTS = 5;
 
 const axonY = (t: number, width: number, wave: number, phase: number) =>
   Math.sin(t * Math.PI * 2 + phase) * width * 0.018 * wave;
+
+/** Sleeve centers/sizes relative to the nerve's (x, y), e.g. to morph sleeves into other shapes. */
+export const sleeveGeometry = (width: number, wave = 1, phase = 0) => {
+  const half = width / 2;
+  const h = 46 * Math.min(1, width / 700);
+  const w = (width * 0.72) / SEGMENTS - 14;
+  return Array.from({ length: SEGMENTS }, (_, i) => {
+    const t = 0.2 + ((i + 0.5) / SEGMENTS) * 0.66;
+    return { t, cx: half - t * width, cy: axonY(t, width, wave, phase), w, h };
+  });
+};
 
 /**
  * Minimal neuron: cell body with dendrites on the right, a myelinated axon
@@ -38,6 +56,8 @@ export const NerveMyelin: React.FC<NerveMyelinProps> = ({
   wave = 1,
   opacity = 1,
   phase = 0,
+  damage,
+  pulses = [],
 }) => {
   if (opacity <= 0 || width <= 1) return null;
   const half = width / 2;
@@ -82,6 +102,48 @@ export const NerveMyelin: React.FC<NerveMyelinProps> = ({
         const cy = axonY(t, width, wave, phase);
         const w = segW * visible;
         const h = sheathH * (0.4 + 0.6 * visible);
+        const dmg = damage && damage.index === i ? damage.amount : 0;
+        if (dmg > 0) {
+          // Frayed, thinner sleeve with a gap in its outline; fragments drift off.
+          const dh = h * (1 - 0.42 * dmg);
+          const dw = w * (1 - 0.18 * dmg);
+          return (
+            <g key={i} opacity={visible}>
+              <rect
+                x={cx - dw / 2}
+                y={cy - dh / 2}
+                width={dw}
+                height={dh}
+                rx={dh / 2}
+                fill={BRAND.beige}
+                opacity={1 - 0.45 * dmg}
+              />
+              <rect
+                x={cx - dw / 2}
+                y={cy - dh / 2}
+                width={dw}
+                height={dh}
+                rx={dh / 2}
+                fill="none"
+                stroke={BRAND.charcoal}
+                strokeWidth={4}
+                strokeDasharray={`${10 - 4 * dmg} ${4 + 10 * dmg}`}
+              />
+              {[0, 1, 2].map((k) => (
+                <circle
+                  key={k}
+                  cx={cx - dw / 3 + k * (dw / 3)}
+                  cy={cy - dh / 2 - 8 - 26 * dmg * (0.6 + 0.4 * ((k + 1) % 2))}
+                  r={5 - k}
+                  fill={BRAND.beige}
+                  stroke={BRAND.charcoal}
+                  strokeWidth={2.5}
+                  opacity={dmg}
+                />
+              ))}
+            </g>
+          );
+        }
         return (
           <rect
             key={i}
@@ -97,6 +159,23 @@ export const NerveMyelin: React.FC<NerveMyelinProps> = ({
           />
         );
       })}
+      {/* Signal pulses travelling along the (always continuous) axon. */}
+      {pulses.map((p, i) =>
+        p > 0 && p < 1 ? (
+          <g
+            key={i}
+            transform={`translate(${half - p * width} ${axonY(p, width, wave, phase)})`}
+          >
+            <circle r={16} fill={BRAND.offWhite} opacity={0.35} />
+            <circle
+              r={8}
+              fill={BRAND.offWhite}
+              stroke={BRAND.charcoal}
+              strokeWidth={2}
+            />
+          </g>
+        ) : null,
+      )}
       {/* Cell body with dendrites (right end). */}
       <g
         transform={`translate(${half + 34} 0) scale(${myelin})`}

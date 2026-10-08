@@ -36,6 +36,10 @@
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
     "render:vitamin-d": "remotion render VitaminDMS renders/vitamin-d-ms.mp4 --codec=h264 --crf=18 --color-space=bt709",
-    "render:vitamin-d-part2": "remotion render VitaminDMS-Part2 renders/vitamin-d-ms-part2.mp4 --codec=h264 --crf=18 --color-space=bt709"
+    "render:vitamin-d-part2": "remotion render VitaminDMS-Part2 renders/vitamin-d-ms-part2.mp4 --codec=h264 --crf=18 --color-space=bt709",
+    "render:tayibat": "remotion render TayibatMS renders/tayibat-ms-30s.mp4 --codec=h264 --crf=18 --color-space=bt709",
+    "render:tayibat:sfx": "remotion render TayibatMS renders/tayibat-ms-30s-sfx.wav --codec=wav",
+    "render:tayibat:video-only": "remotion render TayibatMS renders/tayibat-ms-30s-video-only.mp4 --codec=h264 --crf=18 --color-space=bt709 --muted",
+    "render:tayibat:cues": "node --no-warnings scripts/export-sfx-cues.mjs"
   }
 }
