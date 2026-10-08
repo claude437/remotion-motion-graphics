@@ -9,6 +9,8 @@ import { IntroScene } from "./scenes/IntroScene";
 import { OutroScene } from "./scenes/OutroScene";
 import { FORMAT } from "./videos/vitamin-d-ms/timeline";
 import { VitaminDMS } from "./videos/vitamin-d-ms/VitaminDMS";
+import { FORMAT as PART2_FORMAT } from "./videos/vitamin-d-ms-part2/timeline";
+import { VitaminDMSPart2 } from "./videos/vitamin-d-ms-part2/VitaminDMSPart2";
 
 /**
  * Every renderable video is registered here. Width, height and fps come from
@@ -65,6 +67,16 @@ export const RemotionRoot: React.FC = () => {
         height={FORMAT.height}
         fps={FORMAT.fps}
         durationInFrames={FORMAT.seconds * FORMAT.fps}
+      />
+
+      {/* Part 2 of the series (continues from VitaminDMS's final frame). Timing: src/videos/vitamin-d-ms-part2/timeline.ts */}
+      <Composition
+        id="VitaminDMS-Part2"
+        component={VitaminDMSPart2}
+        width={PART2_FORMAT.width}
+        height={PART2_FORMAT.height}
+        fps={PART2_FORMAT.fps}
+        durationInFrames={PART2_FORMAT.seconds * PART2_FORMAT.fps}
       />
 
       {/* new-compositions-go-above-this-line */}

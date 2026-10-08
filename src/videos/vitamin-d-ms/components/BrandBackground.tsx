@@ -9,6 +9,10 @@ type BrandBackgroundProps = {
   readonly fps: number;
   readonly width: number;
   readonly height: number;
+  /** [seconds, y] keyframes for the blob's vertical focus. Defaults to Part 1. */
+  readonly focus?: ReadonlyArray<readonly [number, number]>;
+  /** Seconds at which the blob settles into its next shape. Defaults to Part 1's scenes. */
+  readonly morphTimes?: readonly number[];
 };
 
 const BLOB_POINTS = 10;
@@ -22,6 +26,15 @@ const BLOB_SHAPES: readonly (readonly number[])[] = [
   [1, 0.95, 1.04, 0.97, 1.06, 0.92, 1.03, 0.98, 1.05, 0.94],
 ];
 const SCENE_STARTS = Object.values(SCENES).map((s) => s.start);
+const PART1_FOCUS: ReadonlyArray<readonly [number, number]> = [
+  [0, 860],
+  [SCENES.association.start + 0.5, 960],
+  [SCENES.immune.start + 0.5, 1000],
+  [SCENES.mri.start + 0.5, 900],
+  [SCENES.dose.start + 0.5, 990],
+  [16, 1020],
+];
+const PART1_MORPHS = SCENE_STARTS.map((s) => s + 0.6);
 
 /** Catmull-Rom closed curve through points, as a cubic Bézier path. */
 const closedCurve = (pts: readonly [number, number][]) => {
@@ -57,23 +70,20 @@ export const BrandBackground: React.FC<BrandBackgroundProps> = ({
   fps,
   width,
   height,
+  focus = PART1_FOCUS,
+  morphTimes = PART1_MORPHS,
 }) => {
   const t = frame / fps;
   const cx = width / 2;
-  const cy = track(frame, fps, [
-    [0, 860],
-    [SCENES.association.start + 0.5, 960],
-    [SCENES.immune.start + 0.5, 1000],
-    [SCENES.mri.start + 0.5, 900],
-    [SCENES.dose.start + 0.5, 990],
-    [16, 1020],
-  ]);
+  const cy = track(frame, fps, focus);
   const radius = 470 + Math.sin(t * 0.9) * 14;
   const pts = Array.from({ length: BLOB_POINTS }, (_, i) => {
     const m = track(
       frame,
       fps,
-      SCENE_STARTS.map((s, k) => [s + 0.6, BLOB_SHAPES[k][i]] as const),
+      morphTimes.map(
+        (s, k) => [s, BLOB_SHAPES[k % BLOB_SHAPES.length][i]] as const,
+      ),
     );
     const wobble = 1 + Math.sin(t * 1.1 + i * 1.7) * 0.02;
     const a = (i / BLOB_POINTS) * Math.PI * 2 + t * 0.05;

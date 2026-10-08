@@ -38,6 +38,16 @@ npm run dev                  # then open http://localhost:3000/VitaminDMS
 npm run render:vitamin-d     # → renders/vitamin-d-ms.mp4 (H.264, yuv420p BT.709, CRF 18)
 ```
 
+### VitaminDMS-Part2
+
+The 20-second continuation (1080×1920, 60 fps, 1200 frames). It opens on Part 1's final frame and reuses the same
+brand system and components. Timing: `src/videos/vitamin-d-ms-part2/timeline.ts`.
+
+```bash
+npm run dev                      # then open http://localhost:3000/VitaminDMS-Part2
+npm run render:vitamin-d-part2   # → renders/vitamin-d-ms-part2.mp4
+```
+
 ## Changing resolution, frame rate and duration
 
 Edit `src/config/video.ts`:

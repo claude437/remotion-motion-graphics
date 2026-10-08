@@ -1,4 +1,5 @@
 import React from "react";
+import { interpolateColors } from "remotion";
 import { BRAND, ARABIC_FONT } from "../theme";
 
 type VitaminDIconProps = {
@@ -15,6 +16,11 @@ type VitaminDIconProps = {
   readonly opacity?: number;
   /** Unique id prefix for gradients when several icons are on screen. */
   readonly id?: string;
+  /**
+   * 0 = on the orange background (off-white rays, Part 1 look).
+   * 1 = on an off-white card: orange rays and a charcoal rim keep it legible.
+   */
+  readonly onLight?: number;
 };
 
 const RAY_COUNT = 12;
@@ -29,12 +35,18 @@ export const VitaminDIcon: React.FC<VitaminDIconProps> = ({
   glow = 0.6,
   opacity = 1,
   id = "vd",
+  onLight = 0,
 }) => {
   if (size <= 0.5 || opacity <= 0) return null;
   const r = size / 2;
   const core = r * 0.6;
   const rayInner = r * 0.74;
   const rayOuter = rayInner + (r - rayInner) * rays;
+  const rayColor = interpolateColors(
+    onLight,
+    [0, 1],
+    [BRAND.offWhite, BRAND.orange],
+  );
 
   return (
     <g transform={`translate(${x} ${y})`} opacity={opacity}>
@@ -56,7 +68,7 @@ export const VitaminDIcon: React.FC<VitaminDIconProps> = ({
                   y1={Math.sin(a) * rayInner}
                   x2={Math.cos(a) * rayOuter}
                   y2={Math.sin(a) * rayOuter}
-                  stroke={BRAND.offWhite}
+                  stroke={rayColor}
                   strokeWidth={Math.max(2, size * 0.045)}
                   strokeLinecap="round"
                 />
@@ -64,7 +76,12 @@ export const VitaminDIcon: React.FC<VitaminDIconProps> = ({
             })
           : null}
       </g>
-      <circle r={core} fill={BRAND.offWhite} />
+      <circle
+        r={core}
+        fill={BRAND.offWhite}
+        stroke={BRAND.charcoal}
+        strokeWidth={Math.max(1.5, size * 0.02) * onLight}
+      />
       <circle
         r={core * 0.8}
         fill="none"

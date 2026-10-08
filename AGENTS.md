@@ -22,6 +22,7 @@ src/
   lib/animation.ts      EASE, SPRINGS, CLAMP, sec(), progress(), springIn(), stagger(), fadeInOut()
   lib/audio.ts          framesPerBeat(), beatFrame(), beatPulse(), fadeVolume()
   lib/timeline.ts       getShowcaseTimeline(): scene/transition frame positions for the sample
+  lib/morph.ts          morphStates(): ease persistent objects between per-scene states (both MS videos)
   lib/fonts.ts          loads Inter from public/fonts (offline-safe, blocks render until ready)
   components/           reusable building blocks (see table below)
   scenes/               one file per scene; each is also registered as its own composition
@@ -32,6 +33,9 @@ src/
     theme.ts            MS Fighter brand palette + IBM Plex Sans Arabic loading
     components/         VitaminDIcon, NerveMyelin, ImmuneCells, ResearchCard, MRIScan,
                         ComparisonBars, KineticText, SceneTransition, Chip, BrandBackground, FilmGrain …
+  videos/vitamin-d-ms-part2/  VitaminDMS-Part2: 20 s continuation; opens on Part 1's final frame and reuses
+                        Part 1's theme + components. New: BoneHealthIcon, BloodTestPanel, DoseDecisionPanel,
+                        DoseCard/BigValue, SafetyLimitPanel, DoctorMonitoringPanel, KidneyWarning, SourceIcons, ArLabel
 public/                 static assets, referenced with staticFile("path/inside/public")
   audio/                music-bed.mp3 (120 BPM), whoosh.mp3, click.mp3, pulse.mp3 (scripts/generate-audio.sh)
   fonts/inter/          Inter woff2 files + OFL license
