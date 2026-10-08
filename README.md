@@ -27,6 +27,17 @@ npm run lint                        # ESLint + TypeScript
 npm run upgrade                     # upgrade Remotion packages + agent skills together
 ```
 
+## VitaminDMS (vertical TikTok explainer)
+
+A 16-second, 1080×1920, 60 fps Arabic motion-graphics explainer on Vitamin D and MS, in the MS Fighter palette.
+Every object morphs into the next scene, with no hard cuts. Timing and layout live in
+`src/videos/vitamin-d-ms/timeline.ts`.
+
+```bash
+npm run dev                  # then open http://localhost:3000/VitaminDMS
+npm run render:vitamin-d     # → renders/vitamin-d-ms.mp4 (H.264, yuv420p BT.709, CRF 18)
+```
+
 ## Changing resolution, frame rate and duration
 
 Edit `src/config/video.ts`:

@@ -34,6 +34,7 @@
     "compositions": "remotion compositions",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "render:vitamin-d": "remotion render VitaminDMS renders/vitamin-d-ms.mp4 --codec=h264 --crf=18 --color-space=bt709"
   }
 }

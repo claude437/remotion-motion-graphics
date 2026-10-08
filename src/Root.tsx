@@ -7,6 +7,8 @@ import { getShowcaseTimeline } from "./lib/timeline";
 import { FeaturesScene } from "./scenes/FeaturesScene";
 import { IntroScene } from "./scenes/IntroScene";
 import { OutroScene } from "./scenes/OutroScene";
+import { FORMAT } from "./videos/vitamin-d-ms/timeline";
+import { VitaminDMS } from "./videos/vitamin-d-ms/VitaminDMS";
 
 /**
  * Every renderable video is registered here. Width, height and fps come from
@@ -54,6 +56,16 @@ export const RemotionRoot: React.FC = () => {
           durationInFrames={sec(SHOWCASE_SECONDS.outro, VIDEO.fps)}
         />
       </Folder>
+
+      {/* Vertical 9:16 TikTok explainer. Format + timing: src/videos/vitamin-d-ms/timeline.ts */}
+      <Composition
+        id="VitaminDMS"
+        component={VitaminDMS}
+        width={FORMAT.width}
+        height={FORMAT.height}
+        fps={FORMAT.fps}
+        durationInFrames={FORMAT.seconds * FORMAT.fps}
+      />
 
       {/* new-compositions-go-above-this-line */}
     </>

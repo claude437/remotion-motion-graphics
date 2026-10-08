@@ -74,3 +74,21 @@ export const fadeInOut = (
     [0, 1, 1, 0],
     CLAMP,
   );
+
+/**
+ * Multi-keyframe animation in seconds: `[[0, 100], [1.5, 300], [3, 250]]`.
+ * Each segment between two keyframes is eased individually, so a value can
+ * travel through several resting states on one continuous curve.
+ */
+export const track = (
+  frame: number,
+  fps: number,
+  keys: ReadonlyArray<readonly [seconds: number, value: number]>,
+  easing: (t: number) => number = EASE.inOut,
+) =>
+  interpolate(
+    frame,
+    keys.map(([s]) => s * fps),
+    keys.map(([, v]) => v),
+    { ...CLAMP, easing },
+  );
