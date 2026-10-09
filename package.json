@@ -40,6 +40,10 @@
     "render:tayibat": "remotion render TayibatMS renders/tayibat-ms-30s.mp4 --codec=h264 --crf=18 --color-space=bt709",
     "render:tayibat:sfx": "remotion render TayibatMS renders/tayibat-ms-30s-sfx.wav --codec=wav",
     "render:tayibat:video-only": "remotion render TayibatMS renders/tayibat-ms-30s-video-only.mp4 --codec=h264 --crf=18 --color-space=bt709 --muted",
-    "render:tayibat:cues": "node --no-warnings scripts/export-sfx-cues.mjs"
+    "render:tayibat:cues": "node --no-warnings scripts/export-sfx-cues.mjs",
+    "render:ms-walking": "remotion render MSWalking renders/ms-walking-39s.mp4 --codec=h264 --crf=18 --color-space=bt709",
+    "render:ms-walking:video-only": "remotion render MSWalking renders/ms-walking-39s-video-only.mp4 --codec=h264 --crf=18 --color-space=bt709 --muted",
+    "render:ms-walking:sfx": "remotion render MSWalking renders/ms-walking-39s-sfx.wav --codec=wav",
+    "render:ms-walking:cues": "node --no-warnings scripts/export-sfx-cues.mjs --video=ms-walking"
   }
 }

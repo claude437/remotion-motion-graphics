@@ -40,6 +40,11 @@ src/
     timeline.ts         dependency-free: format, scenes, headlines, layout, SFX cue list (read by export-sfx-cues.mjs)
     components/         FoodPlate, ResearchCards, NutrientTiles (+Battery/BowelIcon/HeatIcon/Checklist),
                         SugarDrink, SmokeIcons, WaterGlass, MedicationCard; reuses NerveMyelin, MRIScan, KineticText …
+  videos/ms-walking/    MSWalking: 39 s (16 segments), 1080×1920 @ 60 fps, MS & walking difficulty; one connected sequence.
+    timeline.ts         dependency-free: scenes, headings, layout, image-asset metadata, scene-relative SFX cues
+    components/         Figure (faceless posable figure: walk/sit-to-stand/heel raise/IK hands), Props (Chair, WallRail,
+                        Cane, Walker, Brain, Muscle, SymptomIcon, TopicCard, Bubble …); original images in
+                        public/images/ms-my-story (shown unmodified inside cards)
 public/                 static assets, referenced with staticFile("path/inside/public")
   audio/                music-bed.mp3 (120 BPM), whoosh.mp3, click.mp3, pulse.mp3 (scripts/generate-audio.sh)
   fonts/inter/          Inter woff2 files + OFL license
@@ -48,7 +53,7 @@ public/                 static assets, referenced with staticFile("path/inside/p
 scripts/
   new-composition.mjs   `npm run new -- Name` scaffolds + registers a composition
   generate-audio.sh     regenerates the sample audio with ffmpeg
-  export-sfx-cues.mjs   TayibatMS SFX cue sheet (CSV) for retiming after slowing the video
+  export-sfx-cues.mjs   SFX cue sheet (CSV) for retiming after slowing a video (`--video=tayibat-ms|ms-walking`)
 out/, renders/          render output (git-ignored)
 ```
 

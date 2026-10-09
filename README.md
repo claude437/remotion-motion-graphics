@@ -62,6 +62,20 @@ npm run render:tayibat:sfx            # → renders/tayibat-ms-30s-sfx.wav (SFX 
 npm run render:tayibat:cues -- 0.8    # → renders/tayibat-ms-30s-sfx-cues.csv (+ times for a 0.8× edit)
 ```
 
+## MSWalking
+
+39 seconds, 1080×1920, 60 fps, 2340 frames: walking difficulty in MS, built around the original MS my story poll and
+page-header images. No narration or music; optional subtle SFX. Timing, headings, layout and SFX cues:
+`src/videos/ms-walking/timeline.ts`.
+
+```bash
+npm run dev                               # then open http://localhost:3000/MSWalking
+npm run render:ms-walking                 # → renders/ms-walking-39s.mp4 (picture + SFX, H.264 CRF 18)
+npm run render:ms-walking:video-only      # → renders/ms-walking-39s-video-only.mp4
+npm run render:ms-walking:sfx             # → renders/ms-walking-39s-sfx.wav (SFX stem only)
+npm run render:ms-walking:cues -- 0.8     # → renders/ms-walking-39s-sfx-cues.csv
+```
+
 ## Changing resolution, frame rate and duration
 
 Edit `src/config/video.ts`:

@@ -7,6 +7,8 @@ type FilmGrainProps = {
   readonly height: number;
   /** Overall strength (0–1). Keep it very light. */
   readonly intensity?: number;
+  /** false = static grain (fixed seed), for a calmer look. */
+  readonly animated?: boolean;
 };
 
 /**
@@ -18,9 +20,10 @@ export const FilmGrain: React.FC<FilmGrainProps> = ({
   width,
   height,
   intensity = 1,
+  animated = true,
 }) => {
   // Change grain every 2 frames (30 updates/s at 60 fps) for a filmic cadence.
-  const seed = Math.floor(frame / 2) % 24;
+  const seed = animated ? Math.floor(frame / 2) % 24 : 5;
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
       <svg

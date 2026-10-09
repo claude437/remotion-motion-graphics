@@ -23,6 +23,11 @@ type NerveMyelinProps = {
    * sheds small fragments, but the axon underneath always stays continuous.
    */
   readonly damage?: { readonly index: number; readonly amount: number };
+  /** Several partially damaged sleeves at once (same rendering as `damage`). */
+  readonly damages?: ReadonlyArray<{
+    readonly index: number;
+    readonly amount: number;
+  }>;
   /** Off-white signal pulses at positions 0 → 1 along the axon (cell body → terminals). */
   readonly pulses?: readonly number[];
 };
@@ -57,6 +62,7 @@ export const NerveMyelin: React.FC<NerveMyelinProps> = ({
   opacity = 1,
   phase = 0,
   damage,
+  damages = [],
   pulses = [],
 }) => {
   if (opacity <= 0 || width <= 1) return null;
@@ -102,7 +108,10 @@ export const NerveMyelin: React.FC<NerveMyelinProps> = ({
         const cy = axonY(t, width, wave, phase);
         const w = segW * visible;
         const h = sheathH * (0.4 + 0.6 * visible);
-        const dmg = damage && damage.index === i ? damage.amount : 0;
+        const dmg = Math.max(
+          damage && damage.index === i ? damage.amount : 0,
+          ...damages.filter((d) => d.index === i).map((d) => d.amount),
+        );
         if (dmg > 0) {
           // Frayed, thinner sleeve with a gap in its outline; fragments drift off.
           const dh = h * (1 - 0.42 * dmg);

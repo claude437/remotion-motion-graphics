@@ -13,6 +13,8 @@ import { FORMAT as PART2_FORMAT } from "./videos/vitamin-d-ms-part2/timeline";
 import { VitaminDMSPart2 } from "./videos/vitamin-d-ms-part2/VitaminDMSPart2";
 import { FORMAT as TAYIBAT_FORMAT } from "./videos/tayibat-ms/timeline";
 import { TayibatMS } from "./videos/tayibat-ms/TayibatMS";
+import { FORMAT as MS_WALKING_FORMAT } from "./videos/ms-walking/timeline";
+import { MSWalking } from "./videos/ms-walking/MSWalking";
 
 /**
  * Every renderable video is registered here. Width, height and fps come from
@@ -89,6 +91,16 @@ export const RemotionRoot: React.FC = () => {
         height={TAYIBAT_FORMAT.height}
         fps={TAYIBAT_FORMAT.fps}
         durationInFrames={TAYIBAT_FORMAT.seconds * TAYIBAT_FORMAT.fps}
+      />
+
+      {/* MS & walking difficulty (16 segments, 39 s). Timing, headings + SFX cues: src/videos/ms-walking/timeline.ts */}
+      <Composition
+        id={MS_WALKING_FORMAT.id}
+        component={MSWalking}
+        width={MS_WALKING_FORMAT.width}
+        height={MS_WALKING_FORMAT.height}
+        fps={MS_WALKING_FORMAT.fps}
+        durationInFrames={MS_WALKING_FORMAT.seconds * MS_WALKING_FORMAT.fps}
       />
 
       {/* new-compositions-go-above-this-line */}
