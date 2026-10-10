@@ -109,7 +109,7 @@ export const solveFigure = (p: FigurePose) => {
 const seg = (pts: Pt[]) => pts.map((q, i) => `${i ? "L" : "M"} ${q.x.toFixed(1)} ${q.y.toFixed(1)}`).join(" ");
 
 /** Faceless schematic figure in the series style: cream head/torso, charcoal limbs. */
-export const Figure: React.FC<FigurePose & { readonly accent?: boolean }> = (p) => {
+export const Figure: React.FC<FigurePose & { readonly accent?: boolean; readonly flip?: boolean }> = (p) => {
   const opacity = p.opacity ?? 1;
   if (opacity <= 0) return null;
   const f = solveFigure(p);
@@ -137,7 +137,7 @@ export const Figure: React.FC<FigurePose & { readonly accent?: boolean }> = (p) 
   const [backArm, frontArm] = f.arms;
   const tw = 46 * f.s;
   return (
-    <g opacity={opacity}>
+    <g opacity={opacity} transform={p.flip ? `matrix(-1 0 0 1 ${2 * p.x} 0)` : undefined}>
       {limb([backArm.wrist, backArm.elbow, f.shoulder].reverse(), 1, true, "ba")}
       {limb([f.hip, backLeg.knee, backLeg.ankle, backLeg.toe], 2, true, "bl")}
       {limb([f.hip, frontLeg.knee, frontLeg.ankle, frontLeg.toe], 3, false, "fl")}

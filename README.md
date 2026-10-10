@@ -76,6 +76,19 @@ npm run render:ms-walking:sfx             # → renders/ms-walking-39s-sfx.wav (
 npm run render:ms-walking:cues -- 0.8     # → renders/ms-walking-39s-sfx-cues.csv
 ```
 
+## MSFatigue
+
+70 seconds, 1080×1920, 60 fps, 4200 frames: MS fatigue, built around the original poll, research screenshot and two
+product photos. Picture only (the creator records the voice); SFX are a separate stem. Timing:
+`src/videos/ms-fatigue/timeline.ts`.
+
+```bash
+npm run dev                            # then open http://localhost:3000/MSFatigue
+npm run render:ms-fatigue              # → renders/ms-fatigue-70s.mp4 (H.264 CRF 18, no audio)
+npm run render:ms-fatigue:sfx          # → renders/ms-fatigue-70s-sfx.wav
+npm run render:ms-fatigue:cues -- 0.8  # → renders/ms-fatigue-70s-sfx-cues.csv
+```
+
 ## Changing resolution, frame rate and duration
 
 Edit `src/config/video.ts`:

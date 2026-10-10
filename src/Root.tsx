@@ -15,6 +15,8 @@ import { FORMAT as TAYIBAT_FORMAT } from "./videos/tayibat-ms/timeline";
 import { TayibatMS } from "./videos/tayibat-ms/TayibatMS";
 import { FORMAT as MS_WALKING_FORMAT } from "./videos/ms-walking/timeline";
 import { MSWalking } from "./videos/ms-walking/MSWalking";
+import { FORMAT as MS_FATIGUE_FORMAT } from "./videos/ms-fatigue/timeline";
+import { MSFatigue } from "./videos/ms-fatigue/MSFatigue";
 
 /**
  * Every renderable video is registered here. Width, height and fps come from
@@ -101,6 +103,16 @@ export const RemotionRoot: React.FC = () => {
         height={MS_WALKING_FORMAT.height}
         fps={MS_WALKING_FORMAT.fps}
         durationInFrames={MS_WALKING_FORMAT.seconds * MS_WALKING_FORMAT.fps}
+      />
+
+      {/* MS fatigue (16 segments, 70 s, no audio in the main render). Timing, headings + SFX cues: src/videos/ms-fatigue/timeline.ts */}
+      <Composition
+        id={MS_FATIGUE_FORMAT.id}
+        component={MSFatigue}
+        width={MS_FATIGUE_FORMAT.width}
+        height={MS_FATIGUE_FORMAT.height}
+        fps={MS_FATIGUE_FORMAT.fps}
+        durationInFrames={MS_FATIGUE_FORMAT.seconds * MS_FATIGUE_FORMAT.fps}
       />
 
       {/* new-compositions-go-above-this-line */}

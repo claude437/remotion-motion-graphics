@@ -17,6 +17,7 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const VIDEOS = {
   "tayibat-ms": "tayibat-ms-30s-sfx-cues.csv",
   "ms-walking": "ms-walking-39s-sfx-cues.csv",
+  "ms-fatigue": "ms-fatigue-70s-sfx-cues.csv",
 };
 const args = process.argv.slice(2);
 const video =

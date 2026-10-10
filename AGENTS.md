@@ -45,6 +45,11 @@ src/
     components/         Figure (faceless posable figure: walk/sit-to-stand/heel raise/IK hands), Props (Chair, WallRail,
                         Cane, Walker, Brain, Muscle, SymptomIcon, TopicCard, Bubble …); original images in
                         public/images/ms-my-story (shown unmodified inside cards)
+  videos/ms-fatigue/    MSFatigue: 70 s (16 segments), 1080×1920 @ 60 fps, MS fatigue; one continuous board with a gentle camera.
+    timeline.ts         dependency-free: scenes, headings, layout, image assets, scene-relative SFX cues ← retime here
+    components/Board.tsx  Battery (metaphor), Bed + sleeper, SunWindow, Fan, Calendar, Steps, Anchor, Sofa, Node,
+                        factor/assessment glyphs; reuses Figure/Chair/TopicCard/Bubble from ms-walking. Originals in
+                        public/images/ms-fatigue + ms-my-story/poll.png (shown unmodified in cards)
 public/                 static assets, referenced with staticFile("path/inside/public")
   audio/                music-bed.mp3 (120 BPM), whoosh.mp3, click.mp3, pulse.mp3 (scripts/generate-audio.sh)
   fonts/inter/          Inter woff2 files + OFL license
@@ -53,7 +58,7 @@ public/                 static assets, referenced with staticFile("path/inside/p
 scripts/
   new-composition.mjs   `npm run new -- Name` scaffolds + registers a composition
   generate-audio.sh     regenerates the sample audio with ffmpeg
-  export-sfx-cues.mjs   SFX cue sheet (CSV) for retiming after slowing a video (`--video=tayibat-ms|ms-walking`)
+  export-sfx-cues.mjs   SFX cue sheet (CSV) for retiming after slowing a video (`--video=tayibat-ms|ms-walking|ms-fatigue`)
 out/, renders/          render output (git-ignored)
 ```
 
